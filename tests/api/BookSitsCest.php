@@ -18,10 +18,11 @@ class BookSitsCest
     {
         $I->sendPost('/flights/1/seats/booking', [
             'username' => 'test',
-            'seats_number' => 9
+            'seats_number' => 2
         ]);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK); // 200
         $I->seeResponseIsJson();
+        dd($I->grabResponse());
         //$I->seeResponseContains('{"result":"ok"}');
 
     }
