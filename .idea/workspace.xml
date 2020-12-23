@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf92e30-6659-4149-be01-52b928f12790" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/_data/dump.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env.testing" beforeDir="false" afterPath="$PROJECT_DIR$/.env.testing" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/example-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/example-app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SeatsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SeatsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Airplane.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Airplane.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Flight.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Flight.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Passenger.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Passenger.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingServiceInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingServiceInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/BookingFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/BookingFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/api.suite.yml" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api.suite.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/api/BookSitsCest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/BookingSeatsCest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +190,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1608554929287</updated>
-      <workItem from="1608554932637" duration="31324000" />
+      <workItem from="1608554932637" duration="34595000" />
     </task>
     <servers />
   </component>
