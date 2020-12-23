@@ -21,7 +21,7 @@ class CreateAirplanesTable extends Migration
             $table->string('aircraft_type');
             $table->integer('sits_count')->unsigned();
             $table->integer('rows')->unsigned();
-            $table->string('A B C _ D E F'); // TODO change to schema
+            $table->string('row_arrangement'); // TODO change to schema
             $table->timestamps();
         });
     }

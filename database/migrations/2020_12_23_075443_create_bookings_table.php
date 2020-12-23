@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateBookingTable
+ * Class CreateBookingsTable
  */
-class CreateBookingTable extends Migration
+class CreateBookingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,16 +16,18 @@ class CreateBookingTable extends Migration
      */
     public function up()
     {
-        Schema::create('booking', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('fly_id')->unsigned();
+            $table->bigInteger('flight_id')->unsigned();
             $table->integer('row')->unsigned();
-            $table->char('sit', 1);
+            $table->char('seat', 1);
             $table->bigInteger('passenger_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('fly_id')->references('id')->on('flights')->onDelete('cascade');
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
             $table->foreign('passenger_id')->references('id')->on('passengers')->onDelete('cascade');
+
+            $table->unique(['flight_id', 'row', 'seat']);
         });
     }
 
@@ -36,6 +38,6 @@ class CreateBookingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking');
+        Schema::dropIfExists('bookings');
     }
 }
