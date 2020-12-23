@@ -16,7 +16,7 @@ use App\Http\Controllers\SeatsController;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::post('/flights/1/seats/booking', [SeatsController::class, 'booking']);
+    Route::post('/flights/{flight}/seats/booking', [SeatsController::class, 'booking']);
 });
 
 

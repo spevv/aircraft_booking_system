@@ -4,24 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeatsBookingRequest;
 use App\Http\Resources\SeatsBookingResource;
-use App\Models\Booking;
 use App\Models\Flight;
+use App\Models\Passenger;
 use App\Services\SeatsBookingService\BookingService;
-use Database\Factories\BookingFactory;
 
+/**
+ * Class SeatsController
+ *
+ * @package App\Http\Controllers
+ */
 class SeatsController extends Controller
 {
 
-    public function booking(SeatsBookingRequest $bookingRequest): SeatsBookingResource
+    /**
+     * Book seats
+     *
+     * @param SeatsBookingRequest $bookingRequest
+     * @param $flightId
+     *
+     * @return SeatsBookingResource
+     */
+    public function booking(SeatsBookingRequest $bookingRequest, $flightId): SeatsBookingResource
     {
-        //$bookingService = new BookingService();
-        //dd('controller');
-//        Booking::factory(1)->create();
-        //$flight = Flight::query()->where('id',51)->first();
-//        dd(Booking::all(), (Flight::query()->first())->bookings);
-        //$bookingService = new BookingService();
-//        dd('test');
+        $passenger = new Passenger(['username' => $bookingRequest->username]); // TODO need some logic for passengers
+        $flight = Flight::query()->first(); // TODO use $flightId. register Flight
 
-        //return new SeatsBookingResource(['test' => 'test']);
+        // TODO move to ServiceProvider
+        $bookingService = new BookingService($flight, $passenger, $bookingRequest->seats_number);
+        $suitableSeats = $bookingService->getSuitableSeats();
+
+        // TODO book seats using $suitableSeats
+
+        return new SeatsBookingResource($bookingService->getReservedList());
     }
 }

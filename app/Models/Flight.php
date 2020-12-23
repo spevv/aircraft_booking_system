@@ -6,7 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Ramsey\Collection\Collection;
 
+/**
+ * Class Flight
+ *
+ * @property Airplane airplane
+ * @property Collection bookings
+ *
+ * @package App\Models
+ */
 class Flight extends Model
 {
     use HasFactory;

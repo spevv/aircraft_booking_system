@@ -32,7 +32,7 @@ class BookingFactory extends Factory
 
         return [
             'flight_id' => $flight->id,
-            'row' => $this->faker->numberBetween(1, $flight->airplane->sits_count),
+            'row' => $this->faker->numberBetween(1, $flight->airplane->rows),
             'seat' => $this->faker->randomElement($flight->airplane->rowArrangementWithoutAisle->toArray()),
             'passenger_id' => Passenger::factory(),
         ];
