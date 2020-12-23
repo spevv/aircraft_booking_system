@@ -16,6 +16,11 @@
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-asserts": "^1.0.0",
+        "codeception/module-laravel5": "^1.1",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-rest": "^1.2",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^0.0.5",
