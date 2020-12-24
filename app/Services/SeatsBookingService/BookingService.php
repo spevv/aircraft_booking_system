@@ -41,9 +41,9 @@ class BookingService implements BookingServiceInterface
 
     /**
      * BookingService constructor.
-     * @param Flight $flight
-     * @param Passenger $passenger
-     * @param int $seatsNumber
+     * @param  Flight  $flight
+     * @param  Passenger  $passenger
+     * @param  int  $seatsNumber
      */
     public function __construct(Flight $flight, Passenger $passenger, int $seatsNumber)
     {
@@ -64,7 +64,7 @@ class BookingService implements BookingServiceInterface
      */
     public function getSuitableSeats(): Collection
     {
-        if($this->countOfFreeSeats < $this->seatsNumber) {
+        if ($this->countOfFreeSeats < $this->seatsNumber) {
             throw new RuntimeException('Not enough seats.'); // TODO move to validation layer
         }
 
@@ -72,10 +72,8 @@ class BookingService implements BookingServiceInterface
 
         // TODO return first free seats
         $count = $this->seatsNumber;
-        for ($i = $count; $i >= 0; $i--)
-        {
+        for ($i = $count; $i >= 0; $i--) {
             $allSeats->each(function ($row) {
-
             });
         }
 
@@ -118,7 +116,7 @@ class BookingService implements BookingServiceInterface
     {
         $list = new Collection();
         $this->getReservedSeats()->each(function ($row, $rowNumber) use ($list) {
-            $list->add(array_key_first($row) . $rowNumber);
+            $list->add(array_key_first($row).$rowNumber);
         });
 
         return $list;

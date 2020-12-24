@@ -19,7 +19,7 @@ class SeatsController extends Controller
     /**
      * Book seats
      *
-     * @param SeatsBookingRequest $bookingRequest
+     * @param  SeatsBookingRequest  $bookingRequest
      * @param $flightId
      *
      * @return SeatsBookingResource

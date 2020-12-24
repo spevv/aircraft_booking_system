@@ -45,7 +45,7 @@ class Airplane extends Model
      */
     public function getRowArrangementWithoutAisleAttribute($key): Collection
     {
-        return $this->rowArrangement->reject(function($value) {
+        return $this->rowArrangement->reject(function ($value) {
             return $value == self::AISLE;
         });
     }
@@ -58,14 +58,12 @@ class Airplane extends Model
     public function schema(): Collection
     {
         $schema = new Collection();
-        for($i = 1; $i <= $this->rows; $i++)
-        {
+        for ($i = 1; $i <= $this->rows; $i++) {
             $row = [];
-            foreach ($this->rowArrangement as $key => $value)
-            {
+            foreach ($this->rowArrangement as $key => $value) {
                 $row[$value] = null;
 
-                if($value == self::AISLE) {
+                if ($value == self::AISLE) {
                     $row[$value] = true;
                 }
             }
@@ -77,7 +75,7 @@ class Airplane extends Model
     }
 
     /**
-     * @param Collection $reserved
+     * @param  Collection  $reserved
      *
      * @return Collection
      */
