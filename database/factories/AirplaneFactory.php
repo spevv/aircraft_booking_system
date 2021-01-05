@@ -30,7 +30,7 @@ class AirplaneFactory extends Factory
         return [
             'aircraft_type' => 'short_range',
             'sits_count' => 156,
-            'rows' => 26,
+            'rows' => 3,
             'row_arrangement' => 'A B C _ D E F'
         ];
     }

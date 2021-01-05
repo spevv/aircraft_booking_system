@@ -1,3 +1,9 @@
+TODO 
+- API test
+- add documentation
+- format code
+
+
 
 The project is not finished. I spent 8 hours on this project.
 

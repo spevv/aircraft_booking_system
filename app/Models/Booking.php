@@ -18,6 +18,8 @@ class Booking extends Model
     protected $fillable = [
         'row',
         'seat',
+        'flight_id',
+        'passenger_id'
     ];
 
     /**

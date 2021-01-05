@@ -17,18 +17,4 @@ interface BookingServiceInterface
      * @return Collection
      */
     public function getSuitableSeats(): Collection;
-
-    /**
-     * Get reserved seats
-     *
-     * @return Collection
-     */
-    public function getReservedSeats(): Collection;
-
-    /**
-     * Reserved list short format
-     *
-     * @return Collection
-     */
-    public function getReservedList(): Collection;
 }

@@ -2,14 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf92e30-6659-4149-be01-52b928f12790" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Models/Row.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Seat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SeatsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SeatsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Airplane.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Airplane.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Booking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Flight.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Flight.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingServiceInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Services/SeatsBookingService/BookingServiceInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/AirplaneFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/AirplaneFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/BookingSeatsCest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/BookingSeatsCest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -22,6 +34,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -160,6 +180,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -168,10 +189,11 @@
       <recent name="$PROJECT_DIR$/app/Http/Controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Models" />
       <recent name="$PROJECT_DIR$/app/Services/SeatsBookingService" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Codeception.codeception.yml">
     <configuration name="codeception.yml" type="CodeceptionConfigurationType" factoryName="Codeception">
       <PhpTestRunnerSettings scope="ConfigurationFile" />
       <method v="2" />
@@ -190,6 +212,7 @@
       <option name="presentableId" value="Default" />
       <updated>1608554929287</updated>
       <workItem from="1608554932637" duration="36273000" />
+      <workItem from="1609766946300" duration="31637000" />
     </task>
     <servers />
   </component>
@@ -206,6 +229,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

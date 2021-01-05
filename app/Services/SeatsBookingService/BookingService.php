@@ -4,6 +4,7 @@ namespace App\Services\SeatsBookingService;
 
 use App\Models\Flight;
 use App\Models\Passenger;
+use App\Models\Row;
 use http\Exception\RuntimeException;
 use Illuminate\Support\Collection;
 
@@ -54,7 +55,7 @@ class BookingService implements BookingServiceInterface
         $this->countOfReservedSeats = $this->flight->bookings()->count();
         $this->countOfFreeSeats = $this->flight->airplane->sits_count - $this->countOfReservedSeats;
 
-        $this->allSeats = $this->getAllSeats();
+        //$this->allSeats = $this->getSeats();
     }
 
     /**
@@ -68,16 +69,40 @@ class BookingService implements BookingServiceInterface
             throw new RuntimeException('Not enough seats.'); // TODO move to validation layer
         }
 
-        $allSeats = $this->getAllSeats();
+        //$allSeats = $this->getSeats();
+        // TODO get this !!!!! should return Row object
+        $leftPart = $this->flight->airplane->getSchemaLeft();
+        $rightPart = $this->flight->airplane->getSchemaRightReversed();
 
-        // TODO return first free seats
-        $count = $this->seatsNumber;
-        for ($i = $count; $i >= 0; $i--) {
-            $allSeats->each(function ($row) {
-            });
+        // TODO write 1 algorithm and revert $rightPart to same as $leftPart
+        $seats = new Collection();
+        switch ($this->seatsNumber) {
+            case 1:
+                $seats = $this->find1Seat($leftPart); // Done left part
+                break;
+            case 2:
+                $seats = $this->find2Seats($rightPart);
+                break;
+//            case 3:
+//                $seats = $this->find3Seats($leftPart);
+//                break;
+//            case 4:
+//                $seats = $this->find4Seats($leftPart);
+//                break;
+//            case 5:
+//                $seats = $this->find5Seats($leftPart);
+//                break;
+//            case 6:
+//                $seats = $this->find6Seats($leftPart);
+//                break;
+//            case 7:
+//                $seats = $this->find7Seats($leftPart);
+//                break;
+//            default:
+//                $seats = '';
         }
 
-        return new Collection();
+        return $seats;
     }
 
     /**
@@ -85,40 +110,183 @@ class BookingService implements BookingServiceInterface
      *
      * @return Collection
      */
-    private function getAllSeats(): Collection
+    private function getSeats(): Collection
     {
-        $reservedSeats = $this->getReservedSeats();
-
-        return $this->flight->airplane->getAllSeats($reservedSeats);
+        return $this->flight->airplane->getSeats();
     }
 
     /**
-     * Get reserved seats
-     *
+     * @param  Collection  $seats
      * @return Collection
      */
-    public function getReservedSeats(): Collection
+    private function find1Seat(Collection $seats)
     {
-        $reservedSchema = new Collection();
-        $this->flight->bookings->each(function ($item) use ($reservedSchema) {
-            $reservedSchema->put($item->row, [$item->seat => $item->passenger_id]);
-        });
+        $seat = $this->getFirstOneFree($seats);
 
-        return $reservedSchema;
+        if ($seat->isEmpty()) {
+            $seat = $this->getPossibleOneFree($seats);
+        }
+
+        return $seat;
     }
 
     /**
-     * Get reserved list
-     *
+     * @param  Collection  $seats
      * @return Collection
      */
-    public function getReservedList(): Collection
+    private function find2Seats(Collection $seats)
     {
-        $list = new Collection();
-        $this->getReservedSeats()->each(function ($row, $rowNumber) use ($list) {
-            $list->add(array_key_first($row).$rowNumber);
+        $bookSeats = $this->getFirstPossible2Free($seats);
+
+        if ($bookSeats->isEmpty()) {
+            $bookSeats = $this->getPossible2Free($seats);
+        }
+
+        return $bookSeats;
+    }
+
+    private function find3Seats(Collection $seats)
+    {
+        // (3+2)
+        // (2+3)
+        // 1 (5)
+    }
+
+    private function find4Seats(Collection $seats)
+    {
+        // (3+2)
+        // (2+3)
+        // 1 (5)
+    }
+
+    private function find5Seats(Collection $seats)
+    {
+        // (3+2)
+        // (2+3)
+        // 1 (5)
+    }
+
+    private function find6Seats(Collection $seats)
+    {
+        // 3 (2)
+        // 2 (3)
+        // 1 (6)
+    }
+
+    private function find7Seats(Collection $seats)
+    {
+        // 3 (2)
+        // 2 (3)
+        // 1 (6)
+    }
+
+    /**
+     * @param  Collection  $seats
+     * @return Collection
+     */
+    private function getFirstOneFree(Collection $seats): Collection
+    {
+        $seat = new Collection();
+        $seats->each(function ($row, $rowNumber) use ($seat) {
+            $first = $row->first();
+            if (is_null($first->status)) {
+                $seat->put($rowNumber, [$first->ident]);
+                return false;
+            }
+
+            if ($seat->isNotEmpty()) {
+                return false;
+            }
         });
 
-        return $list;
+        return $seat;
+    }
+
+    /**
+     * @param  Collection  $seats
+     * @return Collection
+     */
+    private function getPossibleOneFree(Collection $seats): Collection
+    {
+        $seat = new Collection();
+        $seats->each(function ($row, $rowNumber) use ($seat) {
+            foreach ($row as $key => $value) {
+                if (is_null($value->status)) {
+                    $seat->put($rowNumber, [$value->ident]);
+                    break;
+                }
+            }
+
+            if ($seat->isNotEmpty()) {
+                return false;
+            }
+        });
+
+        return $seat;
+    }
+
+    /**
+     * @param  Collection  $seats
+     * @return Collection
+     */
+    private function getFirstPossible2Free(Collection $seats): Collection
+    {
+        $bookSeats = new Collection();
+        $seats->each(function ($row, $rowNumber) use ($bookSeats) {
+            $previousFree = false;
+            foreach ($row as $key => $value) {
+                if (is_null($value->status) ) {
+                    if ($previousFree) {
+                        $bookSeats->put($rowNumber, [$value->ident, $previousFree['ident']]);
+                        break;
+                    }
+
+                    $previousFree = ['rowNumber' => $rowNumber,  'ident' => $value->ident];
+                }
+                else {
+                    break;
+                }
+            }
+
+            if ($bookSeats->isNotEmpty()) {
+                return false;
+            }
+        });
+
+        return $bookSeats;
+    }
+
+    /**
+     * @param  Collection  $seats
+     * @return Collection
+     */
+    private function getPossible2Free(Collection $seats): Collection
+    {
+        $bookSeats = new Collection();
+        $seats->each(function ($row, $rowNumber) use ($bookSeats) {
+            $previousFree = false;
+            foreach ($row as $key => $value) {
+                if (is_null($value->status) && $previousFree) {
+                    if ($previousFree['rowNumber'] == $rowNumber) {
+                        $bookSeats->put($rowNumber, [$previousFree['ident'], $value->ident]);
+                    } else {
+                        $bookSeats->put($previousFree['rowNumber'], [$previousFree['ident']]);
+                        $bookSeats->put($rowNumber, [$value->ident]);
+                    }
+
+                    break;
+                }
+
+                if (is_null($value->status) && ($previousFree == false)) {
+                    $previousFree = ['rowNumber' => $rowNumber,  'ident' => $value->ident];
+                }
+            }
+
+            if ($bookSeats->isNotEmpty()) {
+                return false;
+            }
+        });
+
+        return $bookSeats;
     }
 }
