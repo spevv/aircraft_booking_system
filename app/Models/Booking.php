@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * Class Booking
+ *
+ * @package App\Models
+ */
 class Booking extends Model
 {
     use HasFactory;

@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Support\Collection;
 
+/**
+ * Class Row
+ * @package App\Models
+ */
 class Row
 {
     /**
@@ -15,13 +19,23 @@ class Row
      */
     private $ident;
 
+    /**
+     * Row constructor.
+     *
+     * @param string $ident
+     */
     public function __construct(string $ident)
     {
         $this->ident = $ident;
         $this->seats = new Collection();
-
     }
 
+    /**
+     * Add seat
+     *
+     * @param string $ident
+     * @param $status
+     */
     public function addSeat(string $ident, $status)
     {
         // TODO check if free
@@ -31,6 +45,8 @@ class Row
     }
 
     /**
+     * Get seats
+     *
      * @return Collection
      */
     public function getSeats(): Collection
@@ -39,7 +55,10 @@ class Row
     }
 
     /**
-     * @param  Row  $newRow
+     * Load seats to row
+     *
+     * @param Row $newRow
+     *
      * @return $this
      */
     public function loadSeatsToRow(Row $newRow): self
@@ -52,6 +71,8 @@ class Row
     }
 
     /**
+     * Get left part
+     *
      * @return Collection
      */
     public function getLeftPart(): Collection
@@ -60,6 +81,8 @@ class Row
     }
 
     /**
+     * Get right part
+     *
      * @return Collection
      */
     public function getRightPart(): Collection
@@ -68,6 +91,8 @@ class Row
     }
 
     /**
+     * Get aisle key
+     *
      * @return int
      */
     private function getKeyAisle(): int
@@ -76,6 +101,8 @@ class Row
     }
 
     /**
+     * Get count of free seats of left part
+     *
      * @return int
      */
     private function countFreeLeft(): int
@@ -84,6 +111,8 @@ class Row
     }
 
     /**
+     * Get count of free seats of right part
+     *
      * @return int
      */
     private function countFreeRight(): int
@@ -92,16 +121,22 @@ class Row
     }
 
     /**
-     * @param  int  $count
+     * Has seats in row
+     *
+     * @param int $count
+     *
      * @return bool
      */
-    public function hasSeats(int $count)
+    public function hasSeats(int $count): bool
     {
         return $this->hasSeatsInLeft($count) || $this->hasSeatsInRight($count);
     }
 
     /**
-     * @param  int  $count
+     * Has seats in left
+     *
+     * @param int $count
+     *
      * @return bool
      */
     public function hasSeatsInLeft(int $count): bool
@@ -110,7 +145,10 @@ class Row
     }
 
     /**
-     * @param  int  $count
+     * Has seats in right
+     *
+     * @param int $count
+     *
      * @return bool
      */
     public function hasSeatsInRight(int $count): bool

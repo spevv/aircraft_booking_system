@@ -41,6 +41,8 @@ class Flight extends Model
     }
 
     /**
+     * Get reserved aircraft schema
+     *
      * @return Collection
      */
     public function getReservedSchema(): Collection

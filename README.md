@@ -1,7 +1,3 @@
-TODO
-- API test
-- format code
-
 ###API
 APIs structure of the route looks like this `/api/v1/flights/{flight_id}/seats/booking`
 
@@ -15,7 +11,7 @@ Existing flights will use data about booking from the DB.
 `/api/v1/flights/{flight_id}/seats` - get seats structure (schema), data about reserved, free and all seats (`GET /api/v1/flights/{flight_id}/seats?type=all|reserved|free`)
 
 
-###Time (12 hours)
+###Time (14 hours)
 - preparation and TODO list - 30 minutes
 - preparation DB structure - 30 minutes
 - set up Laravel and libraries - 30 minutes
@@ -24,8 +20,8 @@ Existing flights will use data about booking from the DB.
 - code: migrations, models, factories - 1 hour
 - test and debugging - 30 minutes
 - BookingService logic - 4 hours
-- documentation - 1 hour 30 minutes
-- API tests - 1  hour
+- documentation - 2 hours
+- API tests - 1 hour 30 minutes
 
 ###The steps of implementation
 - build the overall structure of the project (API skeleton), and only then move on to the basic logic (booking service);
@@ -35,11 +31,12 @@ Existing flights will use data about booking from the DB.
 
 
 ###Some useful commands
-- run docker containers from project folder `docker-compose run`
 - install dependencies `php composer install`
+- start docker containers `./vendor/bin/sail up` (https://laravel.com/docs/8.x/sail)
 - copy .env file `cp .env.example .env`
+- run docker containers from project folder `docker-compose run` (https://docs.docker.com/compose/reference/)
 - docker container for test app `docker-compose exec laravel.test bash`
-- run API tests `php ./vendor/bin/codecept run api`
+- run API tests `php ./vendor/bin/codecept run api` (https://codeception.com/for/laravel)
 
 
 ###Additional information

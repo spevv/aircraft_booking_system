@@ -17,7 +17,6 @@ use Illuminate\Support\Collection;
  */
 class SeatsController extends Controller
 {
-
     /**
      * Book seats
      *
@@ -28,22 +27,14 @@ class SeatsController extends Controller
      */
     public function booking(SeatsBookingRequest $bookingRequest, $flightId): SeatsBookingResource
     {
-        $passenger = Passenger::query()->firstOrCreate(['username' => $bookingRequest->username]); // TODO need some logic for passengers
+        /**
+         * @var Flight $flight
+         */
         $flight = Flight::query()->firstOrCreate(['id' => $flightId]); // TODO use $flightId. register Flight in Provider
-
-        Booking::firstOrCreate([
-            'flight_id' => $flight->id,
-            'row' => 1,
-            'seat' => 'A',
-            'passenger_id' => 2
-        ]);
-
-//        Booking::firstOrCreate([
-//            'flight_id' => $flight->id,
-//            'row' => 1,
-//            'seat' => 'B',
-//            'passenger_id' => 2
-//        ]);
+        /**
+         * @var Passenger $passenger
+         */
+        $passenger = Passenger::query()->firstOrCreate(['username' => $bookingRequest->username]); // TODO need some logic for passengers
 
         $reserved = $flight->getReservedSchema();
         $flight->airplane->addReservedSeats($reserved);
@@ -68,10 +59,10 @@ class SeatsController extends Controller
         $seats->each(function ($values, $key) use ($flight, $passenger) {
             foreach ($values as $value) {
                 Booking::query()->create([
-                    'flight_id' => $flight->id,
-                    'row' => $key,
-                    'seat' => $value,
-                    'passenger_id' => $passenger->id
+                    'flight_id'    => $flight->id,
+                    'row'          => $key,
+                    'seat'         => $value,
+                    'passenger_id' => $passenger->id,
                 ]);
             }
         });
@@ -91,6 +82,5 @@ class SeatsController extends Controller
         });
 
         return $list;
-
     }
 }

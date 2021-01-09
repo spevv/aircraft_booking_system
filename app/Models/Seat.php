@@ -1,9 +1,11 @@
 <?php
 
-
 namespace App\Models;
 
-
+/**
+ * Class Seat
+ * @package App\Models
+ */
 class Seat
 {
     /**
@@ -29,6 +31,8 @@ class Seat
     }
 
     /**
+     * Is it aisle
+     *
      * @return bool
      */
     public function isAisle(): bool

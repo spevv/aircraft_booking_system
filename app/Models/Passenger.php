@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Passenger
+ * @package App\Models
+ */
 class Passenger extends Model
 {
     use HasFactory;

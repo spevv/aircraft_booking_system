@@ -54,7 +54,6 @@ class BookingService implements BookingServiceInterface
 
         $this->countOfReservedSeats = $this->flight->bookings()->count();
         $this->countOfFreeSeats = $this->flight->airplane->sits_count - $this->countOfReservedSeats;
-
         //$this->allSeats = $this->getSeats();
     }
 
@@ -70,18 +69,32 @@ class BookingService implements BookingServiceInterface
         }
 
         //$allSeats = $this->getSeats();
-        // TODO get this !!!!! should return Row object
         $leftPart = $this->flight->airplane->getSchemaLeft();
         $rightPart = $this->flight->airplane->getSchemaRightReversed();
 
-        // TODO write 1 algorithm and revert $rightPart to same as $leftPart
+        $seatsFromLeftPart = $this->findInPart($leftPart);
+        $seatsFromRightPart = $this->findInPart($rightPart);
+
+        return $this->getBetterResult($seatsFromLeftPart, $seatsFromRightPart);
+    }
+
+    /**
+     * TODO move find{number}Seats methods to classes like Find1Seat->find(). use interface and inheritance
+     * TODO don't use switch
+     *
+     * @param $part
+     *
+     * @return Collection
+     */
+    private function findInPart($part): Collection
+    {
         $seats = new Collection();
         switch ($this->seatsNumber) {
             case 1:
-                $seats = $this->find1Seat($leftPart); // Done left part
+                $seats = $this->find1Seat($part);
                 break;
             case 2:
-                $seats = $this->find2Seats($rightPart);
+                $seats = $this->find2Seats($part);
                 break;
 //            case 3:
 //                $seats = $this->find3Seats($leftPart);
@@ -119,7 +132,7 @@ class BookingService implements BookingServiceInterface
      * @param  Collection  $seats
      * @return Collection
      */
-    private function find1Seat(Collection $seats)
+    private function find1Seat(Collection $seats): Collection
     {
         $seat = $this->getFirstOneFree($seats);
 
@@ -134,7 +147,7 @@ class BookingService implements BookingServiceInterface
      * @param  Collection  $seats
      * @return Collection
      */
-    private function find2Seats(Collection $seats)
+    private function find2Seats(Collection $seats): Collection
     {
         $bookSeats = $this->getFirstPossible2Free($seats);
 
@@ -145,35 +158,35 @@ class BookingService implements BookingServiceInterface
         return $bookSeats;
     }
 
-    private function find3Seats(Collection $seats)
+    private function find3Seats(Collection $seats): Collection
     {
         // (3+2)
         // (2+3)
         // 1 (5)
     }
 
-    private function find4Seats(Collection $seats)
+    private function find4Seats(Collection $seats): Collection
     {
         // (3+2)
         // (2+3)
         // 1 (5)
     }
 
-    private function find5Seats(Collection $seats)
+    private function find5Seats(Collection $seats): Collection
     {
         // (3+2)
         // (2+3)
         // 1 (5)
     }
 
-    private function find6Seats(Collection $seats)
+    private function find6Seats(Collection $seats): Collection
     {
         // 3 (2)
         // 2 (3)
         // 1 (6)
     }
 
-    private function find7Seats(Collection $seats)
+    private function find7Seats(Collection $seats): Collection
     {
         // 3 (2)
         // 2 (3)
@@ -235,15 +248,14 @@ class BookingService implements BookingServiceInterface
         $seats->each(function ($row, $rowNumber) use ($bookSeats) {
             $previousFree = false;
             foreach ($row as $key => $value) {
-                if (is_null($value->status) ) {
+                if (is_null($value->status)) {
                     if ($previousFree) {
-                        $bookSeats->put($rowNumber, [$value->ident, $previousFree['ident']]);
+                        $bookSeats->put($rowNumber, [$previousFree['ident'], $value->ident]);
                         break;
                     }
 
-                    $previousFree = ['rowNumber' => $rowNumber,  'ident' => $value->ident];
-                }
-                else {
+                    $previousFree = ['rowNumber' => $rowNumber, 'ident' => $value->ident];
+                } else {
                     break;
                 }
             }
@@ -278,7 +290,7 @@ class BookingService implements BookingServiceInterface
                 }
 
                 if (is_null($value->status) && ($previousFree == false)) {
-                    $previousFree = ['rowNumber' => $rowNumber,  'ident' => $value->ident];
+                    $previousFree = ['rowNumber' => $rowNumber, 'ident' => $value->ident];
                 }
             }
 
@@ -288,5 +300,32 @@ class BookingService implements BookingServiceInterface
         });
 
         return $bookSeats;
+    }
+
+    /**
+     * @param  Collection  $leftPart
+     * @param  Collection  $rightPart
+     *
+     * @return Collection
+     */
+    private function getBetterResult(Collection $leftPart, Collection $rightPart): Collection
+    {
+        $seats = $leftPart;
+        if ($leftPart->count() == 0) {
+            $seats = $rightPart;
+        }
+
+        if (($rightPart->count() != 0) && ($rightPart->count() < $leftPart->count())) {
+            $seats = $rightPart;
+        }
+
+        if (
+            ($leftPart->count() == $rightPart->count()) &&
+            ($leftPart->take(1)->keys()->first() > $rightPart->take(1)->keys()->first())
+        ) {
+            $seats = $rightPart;
+        }
+
+        return $seats;
     }
 }

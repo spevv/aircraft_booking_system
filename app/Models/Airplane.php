@@ -56,58 +56,8 @@ class Airplane extends Model
     }
 
     /**
-     * Get Airplane seats schema
+     * Get schema
      *
-     * @return Collection
-     */
-//    public function schema(): Collection
-//    {
-//        $schema = new Collection();
-//        for ($i = 1; $i <= $this->rows; $i++) {
-//            $row = [];
-//            foreach ($this->rowArrangement as $key => $value) {
-//                $row[$value] = null;
-//
-//                if ($value == self::AISLE) {
-//                    $row[$value] = true;
-//                }
-//            }
-//
-//            $schema->put($i, $row);
-//        }
-//
-//        return $schema;
-//    }
-
-    /**
-     * @param  Collection  $reserved
-     *
-     * @return Collection
-     */
-//    public function getAllSeats(Collection $reserved): Collection
-//    {
-//        $reserved->map(function ($value, $key) {
-//            $currentValue = $this->schema->get($key);
-//            foreach ($value as $item => $value2) {
-//                $currentValue[$item] = $value2;
-//            }
-//
-//            $this->schema->put($key, $currentValue);
-//        });
-//
-//        $reserved->each(function ($value, $key){
-//            $currentValue = $this->schema->get($key);
-//            foreach ($value as $item => $value2) {
-//                $currentValue[$item] = $value2;
-//            }
-//
-//            $this->schema->put($key, $currentValue);
-//        });
-//
-//        return $this->schema;
-//    }
-
-    /**
      * @return Collection
      */
     public function schema(): Collection
@@ -128,30 +78,12 @@ class Airplane extends Model
 
         return $schema;
     }
-//
-//    public function schemaNew(): Collection
-//    {
-//        $schema = new Collection();
-//        for ($i = 1; $i <= $this->rows; $i++) {
-//            $row = new Row($i);
-//            $part = 'left'; // TODO can be more than 2 parts
-//            foreach ($this->rowArrangement as $key => $value) {
-//                if ($value == self::AISLE) {
-//                    $row->addSeat($value, true);
-//                    $part = 'right';
-//                } else {
-//                    $row->addSeat($value, null, $part);
-//                }
-//            }
-//
-//            $schema->put($i, $row);
-//        }
-//
-//        return $schema;
-//    }
 
     /**
-     * @param  Collection  $reservedSeats
+     * Load reserved seats to schema
+     *
+     * @param Collection $reservedSeats
+     *
      * @return self
      */
     public function addReservedSeats(Collection $reservedSeats): self
@@ -169,6 +101,8 @@ class Airplane extends Model
     }
 
     /**
+     * Get seats
+     *
      * @return Collection
      */
     public function getSeats(): Collection
@@ -177,6 +111,8 @@ class Airplane extends Model
     }
 
     /**
+     * Get schema of left part of aircraft
+     *
      * @return Collection
      */
     public function getSchemaLeft(): Collection
@@ -187,6 +123,8 @@ class Airplane extends Model
     }
 
     /**
+     * Get schema of right part of aircraft
+     *
      * @return Collection
      */
     public function getSchemaRight(): Collection
@@ -197,6 +135,8 @@ class Airplane extends Model
     }
 
     /**
+     * Get schema of reversed right part of aircraft
+     *
      * @return Collection
      */
     public function getSchemaRightReversed(): Collection
